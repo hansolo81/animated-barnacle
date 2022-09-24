@@ -7,7 +7,7 @@ from django.db.models import ObjectDoesNotExist
 def index(request):
     if request.user.is_anonymous:
         return redirect("/login.html")
-    return html(request, "index")
+    return html(request, "index2")
 
 
 def html(request, filename):
