@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tribe, Domain, Squad, Initiative
+from .models import Tribe, Domain, Squad, Initiative, Sprint
 
 
 class InitiativeAdmin(admin.ModelAdmin):
@@ -34,7 +34,9 @@ class SquadAdmin(admin.ModelAdmin):
     ]
 
 
+
 admin.site.register(Tribe, TribeAdmin)
 admin.site.register(Domain, DomainAdmin)
 admin.site.register(Squad, SquadAdmin)
 admin.site.register(Initiative, InitiativeAdmin)
+admin.site.register(Sprint)

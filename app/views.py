@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import ObjectDoesNotExist
+from .models import *
+from django.views import generic
 
 
 def index(request):
@@ -46,3 +48,13 @@ def html(request, filename):
         context["collapse"] = "pages"
 
     return render(request, f"{filename}.html", context=context)
+
+
+class DomainListView(generic.ListView):
+    model = Domain
+    template_name = 'domain_list.html'
+
+
+class DomainDetailView(generic.DetailView):
+    model = Domain
+    template_name = 'domain_detail.html'
