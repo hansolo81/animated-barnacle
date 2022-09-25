@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tribe, Domain, Squad, Initiative, Sprint
+from .models import Tribe, Domain, Squad, Initiative, Sprint, Member, Role, Skill, Level
 
 
 class InitiativeAdmin(admin.ModelAdmin):
@@ -34,9 +34,16 @@ class SquadAdmin(admin.ModelAdmin):
     ]
 
 
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ('short_name', 'role', 'level')
+
 
 admin.site.register(Tribe, TribeAdmin)
 admin.site.register(Domain, DomainAdmin)
 admin.site.register(Squad, SquadAdmin)
 admin.site.register(Initiative, InitiativeAdmin)
 admin.site.register(Sprint)
+admin.site.register(Member, MemberAdmin)
+admin.site.register(Skill)
+admin.site.register(Role)
+admin.site.register(Level)

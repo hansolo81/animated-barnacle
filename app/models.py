@@ -60,8 +60,6 @@ class Squad(models.Model):
         return self.name
 
 
-
-
 class Initiative(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
@@ -72,3 +70,37 @@ class Initiative(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Level(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Member(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=100)
+    manday_rate = models.DecimalField('Manday Rate', decimal_places=2, max_digits=20, default=30000000.00)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    skill = models.ManyToManyField(Skill)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.first_name  + ' ' + self.last_name
