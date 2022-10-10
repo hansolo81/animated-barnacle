@@ -23,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('<filename>.html', views.html),
     path('', views.index),
+    path('tribes', views.TribeListView.as_view()),
+    path('tribes/<int:pk>', views.TribeDetailView.as_view()),
     path('domains', views.DomainListView.as_view()),
     path('domains/<int:pk>', views.DomainDetailView.as_view())
+
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

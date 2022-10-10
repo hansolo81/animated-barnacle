@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% include "head_part.html" %}
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    {% include "sidebar_part2.html" %}
+
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            {% include "topbar_part.html" %}
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Domain: {{ domain.name }}</h1>
+                </div>
+
+                <div class="row">
+                    <div class='container-fluid'>
+                        <ul class='htimeline' style="list-style: none;">
+                            {%  for mon in domain.sprints.all %}
+                            <li data-date='{{ mon }}' class='step col-sm-2 blue'>
+                                <div class='tasks container-fluid'>
+                                    {% for i in domain.initiative_set.all %}
+                                        {% for sp in i.sprints.all %}
+                                            {% if sp == mon %}
+                                                <div class='task col-sm-10 {{ i.squad.color }}  '>{{ i }}</div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        {% include "footer_part.html" %}
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+{% include "modals_and_scripts_part.html" %}
+
+
+</body>
+
+</html>

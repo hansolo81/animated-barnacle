@@ -33,30 +33,52 @@
 
                 <div class="row">
                     <div class='container-fluid'>
-                        <ul class='htimeline' style="list-style: none;">
-                            {%  for mon in domain.sprints.all %}
-                            <li data-date='{{ mon }}' class='step col-sm-2 blue'>
-                                <div class='tasks container-fluid'>
-                                    {% for i in domain.initiative_set.all %}
-                                        {% for sp in i.sprints.all %}
-                                            {% if sp == mon %}
-                                                <div class='task col-sm-10 green'>{{ i }}</div>
-                                            {% endif %}
+                        {% for yr, sprints in domain.sprints_map %}
+                            <div class="wrapper">
+                                <div class="header">
+                                    <h2>{{ yr }}</h2>
+                                </div>
+                                <div class="gantt">
+                                    <div class="gantt__row gantt__row--months">
+                                        <div class="gantt__row-first"></div>
+                                        {% for sprint in sprints %}
+                                            <span>{{ sprint }}</span>
                                         {% endfor %}
+                                    </div>
+                                    <div class="gantt__row gantt__row--lines" data-month="5">
+                                        {% for sprint in sprints %}
+                                            <span></span>
+                                        {% endfor %}
+                                    </div>
+                                    {% for initiative in domain.initiative_set.all %}
+                                        <div class="gantt__row">
+                                            <div class="gantt__row-first">
+                                                {{ initiative }}
+                                            </div>
+                                            <ul class="gantt__row-bars">
+                                                {% for year, st in initiative.sprint_style.items %}
+                                                    {% if year == yr %}
+                                                        <li style="{{ st }}">
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     {% endfor %}
                                 </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                            </div>
+                        {% endfor %}
                     </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
+
+
+            <!-- End of Main Content -->
 
         </div>
-        <!-- End of Main Content -->
-
         {% include "footer_part.html" %}
 
 

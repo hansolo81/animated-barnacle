@@ -28,45 +28,45 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Domains</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Tribes</h1>
                 </div>
 
                 <div class="row">
-                    {% for domain in domain_list %}
+                    {% for tribe in tribe_list %}
 
                         <div class="col-lg-6">
 
                             <div class="card shadow mb-4">
                                 <div class="d-block card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">{{ domain.name }}</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">{{ tribe.name }}</h6>
                                     <br>
-                                    <a href="#collapse_{{ domain.pk }}" class="btn btn-primary btn-icon-split" data-toggle="collapse"
-                                       role="button" aria-expanded="true" aria-controls="collapse_{{ domain.pk }}">
+                                    <a href="#collapse_{{ tribe.pk }}" class="btn btn-primary btn-icon-split"
+                                       data-toggle="collapse"
+                                       role="button" aria-expanded="true" aria-controls="collapse_{{ tribe.pk }}">
                                                 <span class="icon text-white-50">
-                                                    {{ domain.initiatives_count }}
+                                                    {{ tribe.initiatives_count }}
                                                 </span>
                                         <span class="text">Initiatives</span>
                                     </a>
                                     <a href="#" class="btn btn-info btn-icon-split">
                                                 <span class="icon text-white-50">
-                                                    {{ domain.squad_count }}
+                                                    {{ tribe.squad_count }}
                                                 </span>
                                         <span class="text">Squads</span>
                                     </a>
-                                   <div class="collapse hide" id="collapse_{{ domain.pk }}">
-                                        {% for i in domain.initiative_set.all %}
+                                   <div class="collapse hide" id="collapse_{{ tribe.pk }}">
+                                        {% for i in tribe.domain_set.all %}
                                             <div class="card-body bg-primary text-white shadow py-3">
                                                 <div>
                                                     <a href="/domains/{{ i.pk }}"
                                                        class="btn btn-primary btn-icon-split">
                                                         <span class="text">{{ i }}</span>
                                                     </a>
-                                                    <a href="#" class="btn btn-info btn-icon-split">
-                                                       <span class="text">{{ i.squad|default_if_none:"No" }} Squad</span>
-                                                    </a>
-                                                    <a href="#" class="btn btn-outline-warning btn-icon-split">
-                                                       <span class="text">{{ i.initiative_status.label }}</span>
-                                                    </a>
+                                                    {% for s in i.squad_set.all %}
+                                                        <a href="#" class="btn btn-info btn-icon-split">
+                                                            <span class="text">{{ s|default_if_none:"No" }} Squad</span>
+                                                        </a>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         {% endfor %}
@@ -74,7 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
                     {% endfor %}
 
                 </div>

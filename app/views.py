@@ -50,6 +50,16 @@ def html(request, filename):
     return render(request, f"{filename}.html", context=context)
 
 
+class TribeListView(generic.ListView):
+    model = Tribe
+    template_name = 'tribe_list.html'
+
+
+class TribeDetailView(generic.DetailView):
+    model = Tribe
+    template_name = 'tribe_detail.html'
+
+
 class DomainListView(generic.ListView):
     model = Domain
     template_name = 'domain_list.html'
